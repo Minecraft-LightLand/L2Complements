@@ -16,10 +16,8 @@ public class BlockMixin {
 
 	@Inject(at = @At("HEAD"), method = "spawnDestroyParticles", cancellable = true)
 	public void l2complements$spawnDestroyParticles$cancelParticle(Level level, Player player, BlockPos pos, BlockState state, CallbackInfo ci) {
-		if (RangeDiggingEnchantment.isSuppressed(player.getUUID())) {
+		if (player != null && RangeDiggingEnchantment.isSuppressed(player.getUUID())) {
 			ci.cancel();
 		}
 	}
-
-
 }
