@@ -8,21 +8,18 @@
       "minLevel": 1
     },
     "B": {
-      "item": "minecraft:iron_pickaxe"
-    },
-    "C": {
-      "item": "l2complements:storm_core"
+      "item": "minecraft:stone_pickaxe"
     },
     "D": {
       "item": "minecraft:lapis_lazuli"
     },
     "E": {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:redstone"
     }
   },
   "pattern": [
-    "ECE",
-    "BAB",
+    "E E",
+    " A ",
     "DBD"
   ],
   "result": {

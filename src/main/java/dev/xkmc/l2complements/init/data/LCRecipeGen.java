@@ -37,8 +37,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.BiFunction;
 
-import static dev.xkmc.l2core.serial.recipe.AbstractSmithingRecipe.TEMPLATE_PLACEHOLDER;
-
 public class LCRecipeGen {
 
 	@SuppressWarnings("unchecked")
@@ -66,7 +64,9 @@ public class LCRecipeGen {
 			for (int i = 0; i < LCMats.values().length; i++) {
 				LCMats mat = LCMats.values()[i];
 				ItemEntry<?>[] arr = LCItems.GEN_ITEM[i];
-				genTools(pvd, mat, arr);
+				if (mat == LCMats.ETERNIUM)
+					genToolsSmithing(pvd, mat, arr, ResourceLocation.withDefaultNamespace("iron"));
+				else genTools(pvd, mat, arr);
 			}
 
 			currentFolder = "storage/";
@@ -88,7 +88,7 @@ public class LCRecipeGen {
 					.define('B', LCMats.ETERNIUM.getIngot())
 					.save(pvd, getID(LCBlocks.ETERNAL_ANVIL.get().asItem()));
 
-			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LCMats.ETERNIUM.getNugget(), 1)::unlockedBy, LCItems.EXPLOSION_SHARD.get())
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LCMats.ETERNIUM.getIngot(), 1)::unlockedBy, LCItems.EXPLOSION_SHARD.get())
 					.pattern("3C4").pattern("BAB").pattern("1C2")
 					.define('A', LCItems.EXPLOSION_SHARD.get())
 					.define('B', Items.ANVIL)
@@ -97,7 +97,7 @@ public class LCRecipeGen {
 					.define('2', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.INFINITY, 1))
 					.define('3', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.PROTECTION, 4))
 					.define('4', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.UNBREAKING, 3))
-					.save(pvd, getID(LCMats.ETERNIUM.getNugget()));
+					.save(pvd, getID(LCMats.ETERNIUM.getIngot()));
 
 			blasting(pvd, Items.TOTEM_OF_UNDYING, LCMats.TOTEMIC_GOLD.getIngot(), 1);
 			blasting(pvd, Items.TRIDENT, LCMats.POSEIDITE.getIngot(), 1);
@@ -126,16 +126,44 @@ public class LCRecipeGen {
 					.define('D', Items.BLACKSTONE)
 					.save(pvd, getID(LCItems.PIGLIN_RUNE.get()));
 
-			unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LCItems.FRAGILE_WARP_STONE.get(), 1)::unlockedBy, LCItems.VOID_EYE.get())
-					.requires(Items.ECHO_SHARD).requires(LCItems.VOID_EYE.get(), 1).requires(Items.ENDER_PEARL)
-					.save(pvd, getID(LCItems.FRAGILE_WARP_STONE.get()));
+			unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LCItems.REINFORCED_WARP_STONE.get(), 1)::unlockedBy, LCItems.STORM_CORE.get())
+					.requires(Items.ENDER_PEARL).requires(Items.AMETHYST_SHARD).requires(LCItems.STORM_CORE)
+					.save(pvd, getID(LCItems.REINFORCED_WARP_STONE.get()));
 
-			smithing(pvd, LCItems.FRAGILE_WARP_STONE.get(), LCMats.SHULKERATE.getIngot(), LCItems.REINFORCED_WARP_STONE.get());
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LCItems.SWAP_TEMPLATE.get(), 1)::unlockedBy, Items.COPPER_INGOT)
+					.pattern("III").pattern("IBI").pattern("I I")
+					.define('I', Items.COPPER_INGOT)
+					.define('B', Items.DIORITE)
+					.save(pvd, getID(LCItems.SWAP_TEMPLATE.get()));
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LCItems.ETERNAL_TEMPLATE.get(), 1)::unlockedBy, LCItems.EXPLOSION_SHARD.get())
+					.pattern("III").pattern("IBI").pattern("IXI")
+					.define('I', Items.IRON_INGOT)
+					.define('B', Items.OBSIDIAN)
+					.define('X', LCItems.EXPLOSION_SHARD)
+					.save(pvd, getID(LCItems.ETERNAL_TEMPLATE.get()));
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LCItems.ICE_TEMPLATE.get(), 1)::unlockedBy, LCItems.HARD_ICE.get())
+					.pattern("III").pattern("IBI").pattern("IXI")
+					.define('I', LCItems.HARD_ICE)
+					.define('B', LCItems.STORM_CORE)
+					.define('X', LCItems.EXPLOSION_SHARD)
+					.save(pvd, getID(LCItems.ICE_TEMPLATE.get()));
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LCItems.FIRE_TEMPLATE.get(), 1)::unlockedBy, LCItems.SOUL_FLAME.get())
+					.pattern("III").pattern("IBI").pattern("IXI")
+					.define('I', LCItems.SOUL_FLAME)
+					.define('B', Items.BLACKSTONE)
+					.define('X', LCItems.EXPLOSION_SHARD)
+					.save(pvd, getID(LCItems.FIRE_TEMPLATE.get()));
+
+			smithing(pvd, LCItems.ICE_TEMPLATE.get(), LCItems.WINTERSTORM_WAND.get(), LCItems.EMERALD.get(), LCItems.BOREAS_CEEPTER.get());
+			smithing(pvd, LCItems.FIRE_TEMPLATE.get(), LCItems.HELLFIRE_WAND.get(), LCItems.SUN_MEMBRANE.get(), LCItems.HELIOS_SCEPTER.get());
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LCItems.TOTEM_OF_DREAM.get(), 1)::unlockedBy, LCItems.FRAGILE_WARP_STONE.get())
 					.pattern("CAC").pattern("ABA").pattern("CAC")
 					.define('A', LCMats.TOTEMIC_GOLD.getIngot())
-					.define('B', LCItems.FRAGILE_WARP_STONE.get())
+					.define('B', LCItems.REINFORCED_WARP_STONE.get())
 					.define('C', Items.ENDER_PEARL)
 					.save(pvd, getID(LCItems.TOTEM_OF_DREAM.get()));
 
@@ -211,10 +239,10 @@ public class LCRecipeGen {
 					.define('C', LCItems.EXPLOSION_SHARD.get())
 					.save(pvd, getID(LCItems.SONIC_SHOOTER.get()));
 
-			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LCItems.HELLFIRE_WAND.get(), 1)::unlockedBy, LCItems.SUN_MEMBRANE.get())
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LCItems.HELLFIRE_WAND.get(), 1)::unlockedBy, LCItems.SOUL_FLAME.get())
 					.pattern(" FM").pattern(" CF").pattern("C  ")
 					.define('F', LCItems.SOUL_FLAME.get())
-					.define('M', LCItems.SUN_MEMBRANE.get())
+					.define('M', LCItems.STORM_CORE.get())
 					.define('C', LCItems.EXPLOSION_SHARD.get())
 					.save(pvd, getID(LCItems.HELLFIRE_WAND.get()));
 
@@ -307,9 +335,9 @@ public class LCRecipeGen {
 			var cond = ConditionalRecipeWrapper.of(pvd, BooleanValueCondition.of(LCConfig.RECIPE, e -> e.enableToolRecraftRecipe, true));
 
 			for (int i = 0; i < 9; i++) {
-				smithing(pvd, TOOLS[i], Items.IRON_BLOCK, BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace("iron_" + TOOL_NAME[i])), cond);
-				smithing(pvd, TOOLS[i], Items.GOLD_BLOCK, BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace("golden_" + TOOL_NAME[i])), cond);
-				smithing(pvd, TOOLS[i], Items.DIAMOND_BLOCK, BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace("diamond_" + TOOL_NAME[i])), cond);
+				swapSmithing(pvd, TOOLS[i], Items.IRON_BLOCK, BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace("iron_" + TOOL_NAME[i])), cond);
+				swapSmithing(pvd, TOOLS[i], Items.GOLD_BLOCK, BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace("golden_" + TOOL_NAME[i])), cond);
+				swapSmithing(pvd, TOOLS[i], Items.DIAMOND_BLOCK, BuiltInRegistries.ITEM.get(ResourceLocation.withDefaultNamespace("diamond_" + TOOL_NAME[i])), cond);
 			}
 		}
 
@@ -586,59 +614,137 @@ public class LCRecipeGen {
 			// digging
 			{
 
-				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.CUBIC, pvd, 1)::unlockedBy, LCItems.STORM_CORE.get())
-						.pattern("ECE").pattern("BAB").pattern("DBD")
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.CUBIC, pvd, 1)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("EDE").pattern("BAB").pattern("DBD")
 						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 1))
 						.define('B', Items.STONE_PICKAXE)
-						.define('C', LCItems.STORM_CORE.get())
 						.define('D', Items.LAPIS_LAZULI)
 						.define('E', Items.IRON_INGOT)
 						.save(pvd, getID(LCEnchantments.CUBIC.id()));
 
-				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.PLANE, pvd, 1)::unlockedBy, LCItems.STORM_CORE.get())
-						.pattern("ECE").pattern("DAD").pattern("BBB")
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.CUBIC, pvd, 2)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("EDE").pattern(" A ").pattern("DBD")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 2))
+						.define('B', Items.IRON_PICKAXE)
+						.define('D', Items.LAPIS_LAZULI)
+						.define('E', Items.IRON_INGOT)
+						.save(pvd, getID(LCEnchantments.CUBIC.id(), "_2"));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.CUBIC, pvd, 3)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern(" D ").pattern("DAD").pattern(" B ")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 3))
+						.define('B', Items.DIAMOND_PICKAXE)
+						.define('D', Items.LAPIS_LAZULI)
+						.save(pvd, getID(LCEnchantments.CUBIC.id(), "_3"));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.PLANE, pvd, 1)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("EDE").pattern("DAD").pattern("BBB")
 						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 1))
 						.define('B', Items.STONE_HOE)
-						.define('C', LCItems.STORM_CORE.get())
 						.define('D', Items.LAPIS_LAZULI)
 						.define('E', Items.IRON_INGOT)
 						.save(pvd, getID(LCEnchantments.PLANE.id()));
 
-				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.DRILL, pvd, 1)::unlockedBy, LCItems.STORM_CORE.get())
-						.pattern("ECB").pattern("DAB").pattern("EDB")
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.PLANE, pvd, 2)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern(" D ").pattern("DAD").pattern("EBE")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 2))
+						.define('B', Items.IRON_HOE)
+						.define('D', Items.LAPIS_LAZULI)
+						.define('E', Items.IRON_INGOT)
+						.save(pvd, getID(LCEnchantments.PLANE.id(), "_2"));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.PLANE, pvd, 3)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern(" D ").pattern("DAD").pattern(" B ")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 3))
+						.define('B', Items.DIAMOND_HOE)
+						.define('D', Items.LAPIS_LAZULI)
+						.save(pvd, getID(LCEnchantments.PLANE.id(), "_3"));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.SMART_PLANE, pvd, 1)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("EDE").pattern("DAD").pattern("EBE")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 1))
+						.define('B', Items.GOLDEN_HOE)
+						.define('D', Items.LAPIS_LAZULI)
+						.define('E', Items.REDSTONE)
+						.save(pvd, getID(LCEnchantments.SMART_PLANE.id()));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.SMART_PLANE, pvd, 2)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("EBE").pattern("BAB").pattern("EBE")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), LCEnchantments.PLANE.id(), 2))
+						.define('B', Items.GOLD_INGOT)
+						.define('E', Items.REDSTONE)
+						.save(pvd, getID(LCEnchantments.SMART_PLANE.id(), "_2"));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.SMART_PLANE, pvd, 3)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("EBE").pattern("BAB").pattern("EBE")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), LCEnchantments.PLANE.id(), 3))
+						.define('B', Items.GOLD_INGOT)
+						.define('E', Items.REDSTONE)
+						.save(pvd, getID(LCEnchantments.SMART_PLANE.id(), "_3"));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.DRILL, pvd, 1)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("EDB").pattern("DAB").pattern("EDB")
 						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 1))
 						.define('B', Items.STONE_SHOVEL)
-						.define('C', LCItems.STORM_CORE.get())
 						.define('D', Items.LAPIS_LAZULI)
 						.define('E', Items.IRON_INGOT)
 						.save(pvd, getID(LCEnchantments.DRILL.id()));
 
-				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.VIEN, pvd, 1)::unlockedBy, LCItems.STORM_CORE.get())
-						.pattern("ECE").pattern("BAB").pattern("DBD")
-						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 1))
-						.define('B', Items.IRON_PICKAXE)
-						.define('C', LCItems.STORM_CORE.get())
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.DRILL, pvd, 2)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern(" DE").pattern("DAB").pattern(" DE")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 2))
+						.define('B', Items.IRON_SHOVEL)
 						.define('D', Items.LAPIS_LAZULI)
-						.define('E', Items.GOLD_INGOT)
+						.define('E', Items.IRON_INGOT)
+						.save(pvd, getID(LCEnchantments.DRILL.id(), "_2"));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.DRILL, pvd, 3)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern(" D ").pattern("EAB").pattern(" D ")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 3))
+						.define('B', Items.DIAMOND_SHOVEL)
+						.define('D', Items.LAPIS_LAZULI)
+						.define('E', Items.IRON_INGOT)
+						.save(pvd, getID(LCEnchantments.DRILL.id(), "_3"));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.VIEN, pvd, 1)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("E E").pattern(" A ").pattern("DBD")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 1))
+						.define('B', Items.STONE_PICKAXE)
+						.define('D', Items.LAPIS_LAZULI)
+						.define('E', Items.REDSTONE)
 						.save(pvd, getID(LCEnchantments.VIEN.id()));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.VIEN, pvd, 2)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("E E").pattern(" A ").pattern("DBD")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 2))
+						.define('B', Items.IRON_PICKAXE)
+						.define('D', Items.LAPIS_LAZULI)
+						.define('E', Items.REDSTONE)
+						.save(pvd, getID(LCEnchantments.VIEN.id(), "_2"));
+
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.VIEN, pvd, 3)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern("E E").pattern(" A ").pattern("DBD")
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 3))
+						.define('B', Items.DIAMOND_PICKAXE)
+						.define('D', Items.LAPIS_LAZULI)
+						.define('E', Items.REDSTONE)
+						.save(pvd, getID(LCEnchantments.VIEN.id(), "_3"));
 
 				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.ECHO, pvd, 1)::unlockedBy, LCItems.STORM_CORE.get())
 						.pattern("ECE").pattern("FAF").pattern("DBD")
-						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 1))
-						.define('B', Items.IRON_PICKAXE)
+						.define('A', EnchantmentIngredient.of(pvd.getProvider(), LCEnchantments.VIEN.id(), 1))
+						.define('B', LCItems.RESONANT_FEATHER)
 						.define('C', LCItems.STORM_CORE.get())
 						.define('D', Items.SCULK_SENSOR)
 						.define('F', Items.ECHO_SHARD)
 						.define('E', Items.AMETHYST_SHARD)
 						.save(pvd, getID(LCEnchantments.ECHO.id()));
 
-				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.TREE, pvd, 1)::unlockedBy, LCItems.STORM_CORE.get())
-						.pattern("ECE").pattern("BAB").pattern("DBD")
+				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.TREE, pvd, 1)::unlockedBy, Items.LAPIS_LAZULI)
+						.pattern(" D ").pattern(" A ").pattern("DBD")
 						.define('A', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.EFFICIENCY, 1))
 						.define('B', Items.IRON_AXE)
-						.define('C', LCItems.STORM_CORE.get())
 						.define('D', Items.LAPIS_LAZULI)
-						.define('E', Items.GOLD_INGOT)
 						.save(pvd, getID(LCEnchantments.TREE.id()));
 
 				unlock(pvd, new EnchantmentRecipeBuilder(LCEnchantments.CHUNK_CUBIC, pvd, 1)::unlockedBy, LCItems.BLACKSTONE_CORE.get())
@@ -1107,26 +1213,41 @@ public class LCRecipeGen {
 		Item block = mat.getBlock().asItem();
 		var cond = ConditionalRecipeWrapper.of(pvd, BooleanValueCondition.of(LCConfig.RECIPE, e -> e.enableToolRecraftRecipe, true));
 		for (int i = 0; i < 9; i++) {
-			smithing(pvd, TOOLS[i], block, arr[i].get(), cond);
+			swapSmithing(pvd, TOOLS[i], block, arr[i].get(), cond);
 		}
 
+	}
+
+	public static void genToolsSmithing(RegistrateRecipeProvider pvd, LCMats mat, ItemEntry<?>[] arr, ResourceLocation base) {
+		currentFolder = "generated_tools/" + mat.name().toLowerCase(Locale.ROOT) + "/craft/";
+		Item ingot = mat.getIngot();
+		smithing(pvd, LCItems.ETERNAL_TEMPLATE.get(), getItem(base, "_boots"), ingot, arr[0].get());
+		smithing(pvd, LCItems.ETERNAL_TEMPLATE.get(), getItem(base, "_leggings"), ingot, arr[1].get());
+		smithing(pvd, LCItems.ETERNAL_TEMPLATE.get(), getItem(base, "_chestplate"), ingot, arr[2].get());
+		smithing(pvd, LCItems.ETERNAL_TEMPLATE.get(), getItem(base, "_helmet"), ingot, arr[3].get());
+		smithing(pvd, LCItems.ETERNAL_TEMPLATE.get(), getItem(base, "_sword"), ingot, arr[4].get());
+		smithing(pvd, LCItems.ETERNAL_TEMPLATE.get(), getItem(base, "_axe"), ingot, arr[5].get());
+		smithing(pvd, LCItems.ETERNAL_TEMPLATE.get(), getItem(base, "_shovel"), ingot, arr[6].get());
+		smithing(pvd, LCItems.ETERNAL_TEMPLATE.get(), getItem(base, "_pickaxe"), ingot, arr[7].get());
+		smithing(pvd, LCItems.ETERNAL_TEMPLATE.get(), getItem(base, "_hoe"), ingot, arr[8].get());
 	}
 
 	public static <T> T unlock(RegistrateRecipeProvider pvd, BiFunction<String, Criterion<InventoryChangeTrigger.TriggerInstance>, T> func, Item item) {
 		return func.apply("has_" + pvd.safeName(item), DataIngredient.items(item).getCriterion(pvd));
 	}
 
-	public static void smithing(RegistrateRecipeProvider pvd, TagKey<Item> in, Item mat, Item out) {
-		smithing(pvd, in, mat, out, pvd);
+	public static void swapSmithing(RegistrateRecipeProvider pvd, TagKey<Item> in, Item mat, Item out, RecipeOutput cons) {
+		unlock(pvd, SmithingTransformRecipeBuilder.smithing(Ingredient.of(LCItems.SWAP_TEMPLATE.get()), Ingredient.of(in), Ingredient.of(mat), RecipeCategory.MISC, out)::unlocks, mat).save(cons, getID(out));
 	}
 
-	public static void smithing(RegistrateRecipeProvider pvd, TagKey<Item> in, Item mat, Item out, RecipeOutput cons) {
-		unlock(pvd, SmithingTransformRecipeBuilder.smithing(TEMPLATE_PLACEHOLDER, Ingredient.of(in), Ingredient.of(mat), RecipeCategory.MISC, out)::unlocks, mat).save(cons, getID(out));
+	public static void smithing(RegistrateRecipeProvider pvd, Item template, Item in, Item mat, Item out) {
+		unlock(pvd, SmithingTransformRecipeBuilder.smithing(Ingredient.of(template), Ingredient.of(in), Ingredient.of(mat), RecipeCategory.MISC, out)::unlocks, mat).save(pvd, getID(out));
 	}
 
-	public static void smithing(RegistrateRecipeProvider pvd, Item in, Item mat, Item out) {
-		unlock(pvd, SmithingTransformRecipeBuilder.smithing(TEMPLATE_PLACEHOLDER, Ingredient.of(in), Ingredient.of(mat), RecipeCategory.MISC, out)::unlocks, mat).save(pvd, getID(out));
+	public static Item getItem(ResourceLocation id, String suffix) {
+		return BuiltInRegistries.ITEM.get(id.withSuffix(suffix));
 	}
+
 
 	public static void smelting(RegistrateRecipeProvider pvd, Item source, Item result, float experience) {
 		unlock(pvd, SimpleCookingRecipeBuilder.smelting(Ingredient.of(source), RecipeCategory.MISC, result, experience, 200)::unlockedBy, source)

@@ -1,18 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "A": {
-      "item": "l2complements:eternium_ingot"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "l2complements:eternium_ingot"
   },
-  "pattern": [
-    "AAA",
-    "A A",
-    "A A"
-  ],
+  "base": {
+    "item": "minecraft:iron_leggings"
+  },
   "result": {
     "count": 1,
     "id": "l2complements:eternium_leggings"
+  },
+  "template": {
+    "item": "l2complements:eternal_upgrade_smithing_template"
   }
 }

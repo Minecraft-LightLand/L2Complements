@@ -2,6 +2,7 @@ package dev.xkmc.l2complements.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2complements.content.client.SpeedTrackerPacket;
+import dev.xkmc.l2complements.content.item.anvil.EternalAnvilMenu;
 import dev.xkmc.l2complements.content.item.wand.WandEffectToClient;
 import dev.xkmc.l2complements.events.L2ComplementsClick;
 import dev.xkmc.l2complements.events.LCAttackListener;
@@ -41,7 +42,7 @@ public class L2Complements {
 
 	public static final String MODID = "l2complements";
 	public static final PacketHandlerWithConfig HANDLER = new PacketHandlerWithConfig(
-			MODID, 4,
+			MODID, 5,
 			e -> e.create(EmptyRightClickToServer.class, PLAY_TO_SERVER),
 			e -> e.create(RotateDiggerToServer.class, PLAY_TO_SERVER),
 			e -> e.create(WandEffectToClient.class, PLAY_TO_CLIENT),
@@ -72,7 +73,7 @@ public class L2Complements {
 			DispenserBlock.registerBehavior(LCItems.STRONG_CHARGE.get(), LCItems.STRONG_CHARGE.get().new FireChargeBehavior());
 			DispenserBlock.registerBehavior(LCItems.BLACK_CHARGE.get(), LCItems.BLACK_CHARGE.get().new FireChargeBehavior());
 
-			DefaultQuickAccessActions.quickAccess(MenuType.ANVIL, LCBlocks.ETERNAL_ANVIL.asItem(), AnvilMenuArclight::new, "container.repair");
+			DefaultQuickAccessActions.quickAccess(MenuType.ANVIL, LCBlocks.ETERNAL_ANVIL.asItem(), EternalAnvilMenu::createFloating, "container.repair");
 		});
 	}
 

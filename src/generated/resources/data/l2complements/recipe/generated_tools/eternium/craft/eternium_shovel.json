@@ -1,21 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "A": {
-      "item": "l2complements:eternium_ingot"
-    },
-    "B": {
-      "item": "l2complements:explosion_shard"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "l2complements:eternium_ingot"
   },
-  "pattern": [
-    "A",
-    "B",
-    "B"
-  ],
+  "base": {
+    "item": "minecraft:iron_shovel"
+  },
   "result": {
     "count": 1,
     "id": "l2complements:eternium_shovel"
+  },
+  "template": {
+    "item": "l2complements:eternal_upgrade_smithing_template"
   }
 }

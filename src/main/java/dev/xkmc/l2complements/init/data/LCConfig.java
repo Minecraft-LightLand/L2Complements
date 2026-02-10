@@ -87,6 +87,10 @@ public class LCConfig {
 		public final ModConfigSpec.IntValue emeraldBaseRange;
 		public final ModConfigSpec.IntValue sonicShooterDamage;
 		public final ModConfigSpec.IntValue hellfireWandDamage;
+		public final ModConfigSpec.IntValue sonicShooterCooldown;
+		public final ModConfigSpec.IntValue scepterOfHeliosDamage;
+		public final ModConfigSpec.IntValue scepterOfBoreasDamage;
+
 
 		public final ModConfigSpec.IntValue iceEnchantDuration;
 		public final ModConfigSpec.IntValue flameEnchantDuration;
@@ -186,8 +190,14 @@ public class LCConfig {
 
 				sonicShooterDamage = builder.text("Sonic Shooter Damage")
 						.defineInRange("sonicShooterDamage", 10, 1, 1000);
+				sonicShooterCooldown = builder.text("Sonic Shooter Cooldown")
+						.defineInRange("sonicShooterCooldown", 20, 1, 1000);
 				hellfireWandDamage = builder.text("Hellfire Wand Damage per second charged (max 3 seconds charged)")
 						.defineInRange("hellfireWandDamage", 10, 1, 1000);
+				scepterOfHeliosDamage = builder.text("Scepter of Helios Damage per second charged (max 1 seconds charged)")
+						.defineInRange("scepterOfHeliosDamage", 20, 1, 1000);
+				scepterOfBoreasDamage = builder.text("Scepter of Boreas Damage (4 hits per seconds)")
+						.defineInRange("scepterOfBoreasDamage", 5, 1, 1000);
 
 			}
 			builder.pop();

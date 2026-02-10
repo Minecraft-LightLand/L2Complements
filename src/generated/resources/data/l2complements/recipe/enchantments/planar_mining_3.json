@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "type": "l2core:enchantment",
+      "enchantment": "minecraft:efficiency",
+      "minLevel": 3
+    },
+    "B": {
+      "item": "minecraft:diamond_hoe"
+    },
+    "D": {
+      "item": "minecraft:lapis_lazuli"
+    }
+  },
+  "pattern": [
+    " D ",
+    "DAD",
+    " B "
+  ],
+  "result": {
+    "components": {
+      "minecraft:stored_enchantments": {
+        "levels": {
+          "l2complements:planar_mining": 3
+        }
+      }
+    },
+    "count": 1,
+    "id": "minecraft:enchanted_book"
+  }
+}

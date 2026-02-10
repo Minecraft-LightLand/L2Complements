@@ -10,19 +10,13 @@
     "B": {
       "item": "minecraft:iron_axe"
     },
-    "C": {
-      "item": "l2complements:storm_core"
-    },
     "D": {
       "item": "minecraft:lapis_lazuli"
-    },
-    "E": {
-      "item": "minecraft:gold_ingot"
     }
   },
   "pattern": [
-    "ECE",
-    "BAB",
+    " D ",
+    " A ",
     "DBD"
   ],
   "result": {

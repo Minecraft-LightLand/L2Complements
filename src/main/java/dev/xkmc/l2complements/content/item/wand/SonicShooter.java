@@ -50,11 +50,12 @@ public class SonicShooter extends WandItem implements IGlowingTarget {
 
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
-		if (level instanceof ServerLevel sl && user instanceof Player) {
+		if (level instanceof ServerLevel sl && user instanceof Player pl) {
 			Vec3 src = user.getEyePosition();
 			Vec3 dst = RayTraceUtil.getRayTerm(src, user.getXRot(), user.getYRot(), RANGE);
 			Vec3 dir = dst.subtract(src).normalize();
 			shoot(sl, user, stack, src, dir);
+			pl.getCooldowns().addCooldown(this, LCConfig.SERVER.sonicShooterCooldown.get());
 		}
 		return stack;
 	}

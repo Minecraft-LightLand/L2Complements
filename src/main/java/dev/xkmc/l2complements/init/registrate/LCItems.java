@@ -7,12 +7,9 @@ import dev.xkmc.l2complements.content.entity.fireball.SoulFireball;
 import dev.xkmc.l2complements.content.entity.fireball.StrongFireball;
 import dev.xkmc.l2complements.content.item.create.RefinedRadianceItem;
 import dev.xkmc.l2complements.content.item.create.VoidEyeItem;
-import dev.xkmc.l2complements.content.item.misc.FireChargeItem;
 import dev.xkmc.l2complements.content.item.misc.*;
-import dev.xkmc.l2complements.content.item.wand.DiffusionWand;
-import dev.xkmc.l2complements.content.item.wand.HellfireWand;
-import dev.xkmc.l2complements.content.item.wand.SonicShooter;
-import dev.xkmc.l2complements.content.item.wand.WinterStormWand;
+import dev.xkmc.l2complements.content.item.misc.FireChargeItem;
+import dev.xkmc.l2complements.content.item.wand.*;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.data.LCConfig;
 import dev.xkmc.l2complements.init.data.LCLang;
@@ -23,7 +20,6 @@ import dev.xkmc.l2core.init.reg.simple.DCReg;
 import dev.xkmc.l2core.init.reg.simple.DCVal;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -37,7 +33,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.Tags;
@@ -106,8 +101,11 @@ public class LCItems {
 	public static final ItemEntry<HellfireWand> HELLFIRE_WAND;
 	public static final ItemEntry<WinterStormWand> WINTERSTORM_WAND;
 	public static final ItemEntry<DiffusionWand> DIFFUSION_WAND;
+	public static final ItemEntry<HeliosScepter> HELIOS_SCEPTER;
+	public static final ItemEntry<BoreasScepter> BOREAS_CEEPTER;
 
-	public static final ItemEntry<Item> TOTEMIC_CARROT, TOTEMIC_APPLE, ENCHANT_TOTEMIC_CARROT, ENCHANTED_TOTEMIC_APPLE;
+	public static final ItemEntry<Item> TOTEMIC_CARROT, TOTEMIC_APPLE, ENCHANT_TOTEMIC_CARROT, ENCHANTED_TOTEMIC_APPLE,
+			SWAP_TEMPLATE, ETERNAL_TEMPLATE, ICE_TEMPLATE, FIRE_TEMPLATE;
 
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 	public static final ItemEntry<Item>[][] GEN_ITEM;
@@ -151,11 +149,11 @@ public class LCItems {
 		{
 			FRAGILE_WARP_STONE = REGISTRATE.item("fragile_warp_stone", p ->
 							new WarpStone(p.fireResistant().stacksTo(1).rarity(Rarity.RARE), true))
-					.defaultModel().defaultLang().register();
+					.defaultModel().defaultLang().removeTab(TAB_ITEM.key()).register();
 			REINFORCED_WARP_STONE = REGISTRATE.item("reinforced_warp_stone", p ->
 							new WarpStone(p.fireResistant().stacksTo(1).durability(64).rarity(Rarity.RARE), false))
 					.tag(ItemTags.DURABILITY_ENCHANTABLE)
-					.defaultModel().defaultLang().register();
+					.defaultModel().lang("Warp Stone").register();
 
 			TagKey<Item> charm = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "charm"));
 
@@ -190,7 +188,7 @@ public class LCItems {
 					.defaultModel().defaultLang().register();
 
 			SONIC_SHOOTER = REGISTRATE.item("sonic_shooter", p ->
-							new SonicShooter(p.durability(64).fireResistant().rarity(Rarity.EPIC)))
+							new SonicShooter(p.durability(256).fireResistant().rarity(Rarity.EPIC)))
 					.tag(ItemTags.DURABILITY_ENCHANTABLE)
 					.model((ctx, pvd) -> {
 								var parent = new ModelFile.UncheckedModelFile(pvd.modLoc("item/gun"));
@@ -206,19 +204,35 @@ public class LCItems {
 							}
 					).defaultLang().register();
 
-			HELLFIRE_WAND = REGISTRATE.item("hellfire_wand", p ->
-							new HellfireWand(p.durability(64).fireResistant().rarity(Rarity.EPIC)))
-					.tag(ItemTags.DURABILITY_ENCHANTABLE)
-					.model((ctx, pvd) -> pvd.handheld(ctx)).defaultLang().register();
-
 			DIFFUSION_WAND = REGISTRATE.item("diffusion_wand", p ->
 							new DiffusionWand(p.durability(8).fireResistant().rarity(Rarity.RARE)))
+					.model((ctx, pvd) -> pvd.handheld(ctx)).defaultLang().register();
+
+			HELLFIRE_WAND = REGISTRATE.item("hellfire_wand", p ->
+							new HellfireWand(p.durability(64).fireResistant().rarity(Rarity.RARE)))
+					.tag(ItemTags.DURABILITY_ENCHANTABLE)
 					.model((ctx, pvd) -> pvd.handheld(ctx)).defaultLang().register();
 
 			WINTERSTORM_WAND = REGISTRATE.item("winterstorm_wand", p ->
 							new WinterStormWand(p.durability(128).fireResistant().rarity(Rarity.RARE)))
 					.tag(ItemTags.DURABILITY_ENCHANTABLE)
 					.model((ctx, pvd) -> pvd.handheld(ctx)).defaultLang().register();
+
+			HELIOS_SCEPTER = REGISTRATE.item("scepter_of_helios", p ->
+							new HeliosScepter(p.durability(1024).fireResistant().rarity(Rarity.EPIC)))
+					.model((ctx, pvd) -> pvd.handheld(ctx))
+					.lang("Scepter of Helios").register();
+
+			BOREAS_CEEPTER = REGISTRATE.item("scepter_of_boreas", p ->
+							new BoreasScepter(p.durability(1024).fireResistant().rarity(Rarity.EPIC)))
+					.model((ctx, pvd) -> pvd.handheld(ctx))
+					.lang("Scepter of Boreas").register();
+		}
+		{
+			SWAP_TEMPLATE = REGISTRATE.item("material_swap_smithing_template", Item::new).defaultLang().register();
+			ETERNAL_TEMPLATE = REGISTRATE.item("eternal_upgrade_smithing_template", Item::new).defaultLang().register();
+			ICE_TEMPLATE = REGISTRATE.item("frost_upgrade_smithing_template", Item::new).defaultLang().register();
+			FIRE_TEMPLATE = REGISTRATE.item("flame_upgrade_smithing_template", Item::new).defaultLang().register();
 		}
 		{
 			TOTEMIC_CARROT = REGISTRATE.item("totemic_carrot", p -> new Item(p.food(

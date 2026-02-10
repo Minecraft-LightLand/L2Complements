@@ -56,7 +56,7 @@ public class HellfireWand extends WandItem {
 			float tpi = (float) (Math.PI * 2);
 			Vec3 v0 = new Vec3(0, radius, 0);
 			v0 = v0.xRot(tpi / 4).yRot(level.getRandom().nextFloat() * tpi);
-			level.addAlwaysVisibleParticle(ParticleTypes.FLAME,
+			level.addAlwaysVisibleParticle(time > 60 && i <= 1 ? ParticleTypes.SOUL_FIRE_FLAME : ParticleTypes.FLAME,
 					center.x + v0.x,
 					center.y + v0.y + 0.5f,
 					center.z + v0.z,

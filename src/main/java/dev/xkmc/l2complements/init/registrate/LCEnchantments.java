@@ -70,7 +70,7 @@ public class LCEnchantments {
 	public static final EnchVal.Legacy<HellfireThornEnchantment> HELLFIRE_THORN;
 
 	public static final EnchVal.Legacy<RangeDiggingEnchantment>
-			CUBIC, PLANE, DRILL, VIEN, ECHO, TREE, CHUNK_CUBIC, CHUNK_PLANE;
+			CUBIC, PLANE, SMART_PLANE, DRILL, VIEN, ECHO, TREE, CHUNK_CUBIC, CHUNK_PLANE;
 
 
 	public static final AttVal.PlayerVal<SoulBoundPlayerData> ATT_SOULBOUND = AttReg.of(L2Complements.REG).player("soulbound",
@@ -246,23 +246,28 @@ public class LCEnchantments {
 		{
 
 			CUBIC = REG.enchLegacy("cubic_mining", "Cubic Mining", "Dig %1$sx%1$sx%1$s blocks at once",
-					e -> e.items(ItemTags.MINING_ENCHANTABLE).maxLevel(2)
-							.color(green).special(CRAFT, order.of(digging)),
+					e -> e.items(ItemTags.MINING_ENCHANTABLE).maxLevel(3)
+							.color(green).special(CRAFT, order.of(digging, 3)),
 					() -> new RangeDiggingEnchantment(new CubicBlockBreaker(1)));
 
 			PLANE = REG.enchLegacy("planar_mining", "Planar Mining", "Dig %1$sx%1$s blocks at once",
 					e -> e.items(ItemTags.MINING_ENCHANTABLE).maxLevel(3)
-							.color(green).special(CRAFT, order.of(digging)),
+							.color(green).special(CRAFT, order.of(digging, 3)),
 					() -> new RangeDiggingEnchantment(new PlaneBlockBreaker(2)));
+
+			SMART_PLANE = REG.enchLegacy("smart_planar_mining", "Smart Planar Mining", "Dig 1 layer of connected exposed face at once, up tp %1$sx%1$s blocks",
+					e -> e.items(ItemTags.MINING_ENCHANTABLE).maxLevel(3)
+							.color(green).special(CRAFT, order.of(digging, 3)),
+					() -> new RangeDiggingEnchantment(new SmartPlaneBlockBreaker(2)));
 
 			DRILL = REG.enchLegacy("drilling", "Drilling", "Dig %s blocks at once",
 					e -> e.items(ItemTags.MINING_ENCHANTABLE).maxLevel(3)
-							.color(green).special(CRAFT, order.of(digging)),
+							.color(green).special(CRAFT, order.of(digging, 3)),
 					() -> new RangeDiggingEnchantment(new DrillBlockBreaker(7)));
 
 			VIEN = REG.enchLegacy("vien_mining", "Vein Mining", "Dig connected blocks of the same type, up to %s blocks",
 					e -> e.items(ItemTags.MINING_ENCHANTABLE).maxLevel(3)
-							.color(green).special(CRAFT, order.of(digging)),
+							.color(green).special(CRAFT, order.of(digging, 3)),
 					() -> new RangeDiggingEnchantment(new OreDigger(7, 8)));
 
 			ECHO = REG.enchLegacy("echo_mining", "Echo Mining", "Dig blocks of the same type within radius of %s, up to %s blocks",

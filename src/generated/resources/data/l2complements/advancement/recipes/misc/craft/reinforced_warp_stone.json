@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_shulkerate_ingot": {
+    "has_storm_core": {
       "conditions": {
         "items": [
           {
-            "items": "l2complements:shulkerate_ingot"
+            "items": "l2complements:storm_core"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_shulkerate_ingot"
+      "has_storm_core"
     ]
   ],
   "rewards": {

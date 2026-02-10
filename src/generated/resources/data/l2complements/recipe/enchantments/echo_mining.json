@@ -4,11 +4,11 @@
   "key": {
     "A": {
       "type": "l2core:enchantment",
-      "enchantment": "minecraft:efficiency",
+      "enchantment": "l2complements:vien_mining",
       "minLevel": 1
     },
     "B": {
-      "item": "minecraft:iron_pickaxe"
+      "item": "l2complements:resonant_feather"
     },
     "C": {
       "item": "l2complements:storm_core"

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "l2complements:heirophant_green"
+  },
+  "base": {
+    "item": "l2complements:winterstorm_wand"
+  },
+  "result": {
+    "count": 1,
+    "id": "l2complements:scepter_of_boreas"
+  },
+  "template": {
+    "item": "l2complements:frost_upgrade_smithing_template"
+  }
+}

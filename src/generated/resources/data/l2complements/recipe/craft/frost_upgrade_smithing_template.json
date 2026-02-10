@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "l2complements:storm_core"
+    },
+    "I": {
+      "item": "l2complements:hard_ice"
+    },
+    "X": {
+      "item": "l2complements:explosion_shard"
+    }
+  },
+  "pattern": [
+    "III",
+    "IBI",
+    "IXI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "l2complements:frost_upgrade_smithing_template"
+  }
+}

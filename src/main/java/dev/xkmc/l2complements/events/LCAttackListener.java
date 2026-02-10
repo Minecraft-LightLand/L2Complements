@@ -59,7 +59,7 @@ public class LCAttackListener implements AttackListener {
 	@Override
 	public void onDamageFinalized(DamageData.DefenceMax data) {
 		if (data.getTarget() instanceof Player player) {
-			float damage = data.getDamageIncoming();
+			float damage =Math.max(data.getDamageOriginal(), data.getDamageIncoming());
 			if (data.getSource().is(DamageTypeTags.IS_EXPLOSION) && damage >= LCConfig.SERVER.explosionDamage.get()) {
 				if (data.getDamageFinal() < player.getHealth() + player.getAbsorptionAmount()) {
 					player.getInventory().placeItemBackInInventory(LCItems.EXPLOSION_SHARD.asStack());

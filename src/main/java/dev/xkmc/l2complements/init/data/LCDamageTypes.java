@@ -19,6 +19,7 @@ public class LCDamageTypes extends DamageTypeAndTagsGen {
 	public static final ResourceKey<DamageType> BLEED = create("bleed", "%s bleed to death");
 	public static final ResourceKey<DamageType> LIFE_SYNC = create("life_sync", "%s was drained");
 	public static final ResourceKey<DamageType> VOID_EYE = create("void_eye", "%s was cursed by void eye");
+	public static final ResourceKey<DamageType> FREEZE = create("freeze");
 
 	public static final ResourceKey<DamageType> EMERALD = create("emerald",
 			"%s was killed by emerald splash", "%s was killed by emerald splash from %s");
@@ -40,6 +41,8 @@ public class LCDamageTypes extends DamageTypeAndTagsGen {
 						DamageTypeTags.BYPASSES_COOLDOWN).add(L2DamageTypes.BYPASS_MAGIC);
 		new DamageTypeHolder(VOID_EYE, new DamageType("void_eye", DamageScaling.NEVER, 0f))
 				.add(DamageTypeTags.NO_KNOCKBACK).add(L2DamageTypes.BYPASS_INVUL);
+		new DamageTypeHolder(FREEZE, new DamageType("freeze", DamageScaling.NEVER, 0f))
+				.add(Tags.DamageTypes.IS_MAGIC, DamageTypeTags.BYPASSES_ARMOR, DamageTypeTags.BYPASSES_COOLDOWN);
 	}
 
 	public static Holder<DamageType> forKey(Level level, ResourceKey<DamageType> key) {

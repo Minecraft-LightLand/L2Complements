@@ -1,0 +1,37 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.l2complements.smart_planar_mining"
+  },
+  "effects": {
+    "l2complements:craftable": [
+      {
+        "color": -5263441,
+        "max": 3,
+        "order": 32
+      }
+    ],
+    "l2core:color": [
+      {
+        "base": "green",
+        "desc": "gray"
+      }
+    ],
+    "l2core:legacy": [
+      "l2complements:smart_planar_mining"
+    ]
+  },
+  "max_cost": {
+    "base": 10,
+    "per_level_above_first": 5
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 5
+  },
+  "primary_items": "#minecraft:enchantable/mining",
+  "slots": [],
+  "supported_items": "#minecraft:enchantable/mining",
+  "weight": 1
+}

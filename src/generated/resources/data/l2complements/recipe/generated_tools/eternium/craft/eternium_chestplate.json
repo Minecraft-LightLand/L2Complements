@@ -1,18 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "A": {
-      "item": "l2complements:eternium_ingot"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "l2complements:eternium_ingot"
   },
-  "pattern": [
-    "A A",
-    "AAA",
-    "AAA"
-  ],
+  "base": {
+    "item": "minecraft:iron_chestplate"
+  },
   "result": {
     "count": 1,
     "id": "l2complements:eternium_chestplate"
+  },
+  "template": {
+    "item": "l2complements:eternal_upgrade_smithing_template"
   }
 }

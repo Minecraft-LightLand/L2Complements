@@ -1,3 +1,11 @@
+3.1.1
+- Add 4 smithing templates
+- Add 2 upgraded version of wands
+- Add smart plane digging enchantment
+- Make warp stone cheaper, echo mining more expensive
+- Add cool down for sonic shooter
+- Make eternium cheaper
+
 3.1.0
 - Totemic tools and armor heal based on actual durability loss
 - Wind bottle display speed in progress of obtaining captured wind

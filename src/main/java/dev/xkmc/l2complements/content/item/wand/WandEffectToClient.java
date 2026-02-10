@@ -19,7 +19,12 @@ public record WandEffectToClient(
 	public enum Type {
 		HELLFIRE_TICK(HellfireWand::renderRegionClient),
 		HELLFIRE_TRIGGER(HellfireWand::renderPentagonClient),
-		WINTERSTORM(WinterStormWand::tickClient);
+		WINTERSTORM(WinterStormWand::tickClient),
+		HELIOS_TICK(HeliosScepter::renderRegionClient),
+		HELIOS_TRIGGER(HeliosScepter::renderHexagonClient),
+		BOREAS(BoreasScepter::tickClient),
+		;
+
 
 		private final Handler handler;
 

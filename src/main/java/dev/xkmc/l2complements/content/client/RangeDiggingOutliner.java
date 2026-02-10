@@ -65,10 +65,12 @@ public class RangeDiggingOutliner {
 			CACHE = null;
 			tick = player.tickCount + 10;
 		}
-		if (KEY == null || CACHE == null || e.digger() != KEY.ench() || e.level() != KEY.lv() ||
+		var ench = e.digger();
+		var lv = Math.min(e.ench().value().getMaxLevel(), e.level());
+		if (KEY == null || CACHE == null || ench != KEY.ench() || lv != KEY.lv() ||
 				!pos.equals(KEY.pos) || dir != KEY.dir() || stack != KEY.stack()) {
-			KEY = new CacheKey(e.digger(), e.level(), pos, dir, stack);
-			CACHE = ClusterBitSet.of(pos, e.digger().getTargets(player, pos, stack, e.level()));
+			KEY = new CacheKey(ench, lv, pos, dir, stack);
+			CACHE = ClusterBitSet.of(pos, ench.getTargets(player, pos, stack, lv));
 		}
 		{
 			RenderType type = DiggingRenderType.OUTLINE;
