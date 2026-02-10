@@ -9,6 +9,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -84,7 +85,7 @@ public class SonicShooter extends WandItem implements IGlowingTarget {
 			double d0 = 2.5D * (1.0D - e.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
 			e.push(dir.x() * d0, dir.y() * d1, dir.z() * d0);
 		}
-		user.playSound(SoundEvents.WARDEN_SONIC_BOOM, 3.0F, 1.0F);
+		level.playSound(null, user.blockPosition(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.PLAYERS, 3.0F, 1.0F);
 		stack.hurtAndBreak(1, user, LivingEntity.getSlotForHand(user.getUsedItemHand()));
 	}
 

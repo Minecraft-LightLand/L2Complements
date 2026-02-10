@@ -206,15 +206,16 @@ public class LCItems {
 
 			DIFFUSION_WAND = REGISTRATE.item("diffusion_wand", p ->
 							new DiffusionWand(p.durability(8).fireResistant().rarity(Rarity.RARE)))
+					.tag(ItemTags.DURABILITY_ENCHANTABLE)
 					.model((ctx, pvd) -> pvd.handheld(ctx)).defaultLang().register();
 
 			HELLFIRE_WAND = REGISTRATE.item("hellfire_wand", p ->
-							new HellfireWand(p.durability(64).fireResistant().rarity(Rarity.RARE)))
+							new HellfireWand(p.durability(256).fireResistant().rarity(Rarity.RARE)))
 					.tag(ItemTags.DURABILITY_ENCHANTABLE)
 					.model((ctx, pvd) -> pvd.handheld(ctx)).defaultLang().register();
 
 			WINTERSTORM_WAND = REGISTRATE.item("winterstorm_wand", p ->
-							new WinterStormWand(p.durability(128).fireResistant().rarity(Rarity.RARE)))
+							new WinterStormWand(p.durability(256).fireResistant().rarity(Rarity.RARE)))
 					.tag(ItemTags.DURABILITY_ENCHANTABLE)
 					.model((ctx, pvd) -> pvd.handheld(ctx)).defaultLang().register();
 

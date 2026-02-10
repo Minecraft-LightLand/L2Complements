@@ -3,17 +3,17 @@ package dev.xkmc.l2complements.content.item.misc;
 import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import dev.xkmc.l2complements.content.client.BackupWitherArmorLayer;
+import dev.xkmc.l2complements.content.client.BackupWitherBossModel;
 import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2core.util.Proxy;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.WitherBossModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
-import net.minecraft.client.renderer.entity.layers.WitherArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EntityType;
@@ -39,12 +39,11 @@ public class LCBEWLR extends BlockEntityWithoutLevelRenderer {
 
 	};
 
-	private static final ResourceLocation WITHER_ARMOR = ResourceLocation.withDefaultNamespace("textures/entity/wither/wither_armor.png");
 	private static final ResourceLocation WITHER_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/wither/wither.png");
 
 	private final EntityModelSet entityModelSet;
-	private WitherBossModel<WitherBoss> wither_model;
-	private WitherArmorLayer wither_armor;
+	private BackupWitherBossModel<WitherBoss> wither_model;
+	private BackupWitherArmorLayer wither_armor;
 	private WitherBoss wither;
 
 	public LCBEWLR(BlockEntityRenderDispatcher dispatcher, EntityModelSet set) {
@@ -54,10 +53,10 @@ public class LCBEWLR extends BlockEntityWithoutLevelRenderer {
 
 	public void onResourceManagerReload(ResourceManager manager) {
 		wither = null;
-		wither_model = new WitherBossModel<>(entityModelSet.bakeLayer(ModelLayers.WITHER_ARMOR));
-		wither_armor = new WitherArmorLayer(new RenderLayerParent<>() {
+		wither_model = new BackupWitherBossModel<>(entityModelSet.bakeLayer(ModelLayers.WITHER_ARMOR));
+		wither_armor = new BackupWitherArmorLayer(new RenderLayerParent<>() {
 			@Override
-			public WitherBossModel<WitherBoss> getModel() {
+			public BackupWitherBossModel<WitherBoss> getModel() {
 				return LCBEWLR.this.wither_model;
 			}
 

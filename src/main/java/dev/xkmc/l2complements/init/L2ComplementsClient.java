@@ -1,20 +1,20 @@
 package dev.xkmc.l2complements.init;
 
+import dev.xkmc.l2complements.content.client.BackupWitherArmorLayer;
+import dev.xkmc.l2complements.content.client.BackupWitherBossModel;
 import dev.xkmc.l2complements.content.client.EnchStackDeco;
 import dev.xkmc.l2complements.content.client.RangeDiggingOverlay;
 import dev.xkmc.l2complements.content.item.misc.LCBEWLR;
 import dev.xkmc.l2complements.init.data.LCKeys;
 import dev.xkmc.l2complements.init.registrate.LCItems;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = L2Complements.MODID, bus = EventBusSubscriber.Bus.MOD)
@@ -45,6 +45,11 @@ public class L2ComplementsClient {
 		event.registerReloadListener(LCBEWLR.INSTANCE.get());
 	}
 
+	@SubscribeEvent
+	public static void onModelRegister(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(BackupWitherArmorLayer.WITHER_ARMOR,
+				() -> BackupWitherBossModel.createBodyLayer(new CubeDeformation(0.5F)));
+	}
 
 	@SubscribeEvent
 	public static void registerKeyMaps(RegisterKeyMappingsEvent event) {
