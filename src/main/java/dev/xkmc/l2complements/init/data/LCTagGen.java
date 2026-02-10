@@ -111,10 +111,27 @@ public class LCTagGen {
 				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "astral_sense"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "astral_sense_treasure"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "crimson_descend"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "aptrgangr_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "cursed_revenants_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "desert_dweller_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "ender_golem_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "forsaken_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "gum_worm_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "kobolediator_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "magnetron_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "mechanized_predator_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "primal_pack_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("traveloptics", "vesper_timer"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("gtbcs_geomancy_plus", "solar_storm"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("gtbcs_geomancy_plus", "tremor_step_effect"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("gtbcs_geomancy_plus", "casting"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("gtbcs_geomancy_plus", "aegis"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("gtbcs_geomancy_plus", "seismic_ride_timer"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("alshanex_familiars", "bird_buff"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("cataclysm", "monstrous"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("cataclysm", "ghost_form"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("cataclysm", "ghost_sickness"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "summoning_sickness"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "scrying"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "glide"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "flight"))
@@ -124,7 +141,9 @@ public class LCTagGen {
 				.addOptional(ResourceLocation.fromNamespaceAndPath("ars_nouveau", "magic_find"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("mowziesmobs", "suns_blessing"))
 				.addOptional(ResourceLocation.fromNamespaceAndPath("mowziesmobs", "geomancy"))
-				.addOptional(ResourceLocation.fromNamespaceAndPath("mowziesmobs", "sunblock"));
+				.addOptional(ResourceLocation.fromNamespaceAndPath("mowziesmobs", "sunblock"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("farmersdelight", "nourishment"))
+				.addOptional(ResourceLocation.fromNamespaceAndPath("farmersdelight", "comfort"));
 		pvd.addTag(L2TagGen.TRACKED_EFFECTS).add(LCEffects.FLAME.get(), LCEffects.EMERALD.get(), LCEffects.ICE.get(),
 				LCEffects.INCARCERATE.get(), LCEffects.BLEED.get(), LCEffects.CLEANSE.get(), LCEffects.CURSE.get());
 	}

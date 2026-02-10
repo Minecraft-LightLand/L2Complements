@@ -195,6 +195,70 @@
       "required": false
     },
     {
+      "id": "traveloptics:aptrgangr_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:cursed_revenants_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:desert_dweller_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:ender_golem_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:forsaken_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:gum_worm_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:kobolediator_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:magnetron_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:mechanized_predator_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:primal_pack_timer",
+      "required": false
+    },
+    {
+      "id": "traveloptics:vesper_timer",
+      "required": false
+    },
+    {
+      "id": "gtbcs_geomancy_plus:solar_storm",
+      "required": false
+    },
+    {
+      "id": "gtbcs_geomancy_plus:tremor_step_effect",
+      "required": false
+    },
+    {
+      "id": "gtbcs_geomancy_plus:casting",
+      "required": false
+    },
+    {
+      "id": "gtbcs_geomancy_plus:aegis",
+      "required": false
+    },
+    {
+      "id": "gtbcs_geomancy_plus:seismic_ride_timer",
+      "required": false
+    },
+    {
       "id": "alshanex_familiars:bird_buff",
       "required": false
     },
@@ -208,6 +272,10 @@
     },
     {
       "id": "cataclysm:ghost_sickness",
+      "required": false
+    },
+    {
+      "id": "ars_nouveau:summoning_sickness",
       "required": false
     },
     {
@@ -248,6 +316,14 @@
     },
     {
       "id": "mowziesmobs:sunblock",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:nourishment",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:comfort",
       "required": false
     }
   ]

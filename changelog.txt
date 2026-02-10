@@ -1,4 +1,4 @@
-3.1.1
+3.1.2
 - Add 4 smithing templates
 - Add 2 upgraded version of wands
 - Add smart plane digging enchantment
@@ -9,6 +9,9 @@
 - Fix sonic shooter sound
 - Fix fire wand particle rendering at long distance
 - copy vanilla wither renderer into separate code to prevent mixins breaking force field rendering
+
+3.1.1
+- fix crash with Create 6.0.9
 
 3.1.0
 - Totemic tools and armor heal based on actual durability loss
