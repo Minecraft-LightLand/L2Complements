@@ -460,7 +460,13 @@
 	"item.l2complements.material_swap_smithing_template": "材料替换锻造模版",
 	"item.l2complements.scepter_of_boreas": "凛冬权杖",
 	"item.l2complements.scepter_of_helios": "阳炎权杖",
-	"enchantment.l2complements.smart_plane_digging": "智能平面挖掘连锁",
-	"enchantment.l2complements.smart_plane_digging.desc": "挖掘相连的暴露平面，至多%1$sx%1$s格",
-	"l2complements.tooltip.misc.eternal_anvil": "所有操作不消耗经验。产出无修复惩罚"
+	"enchantment.l2complements.smart_planar_mining": "智能平面挖掘连锁",
+	"enchantment.l2complements.smart_planar_mining.desc": "挖掘相连的暴露平面，至多%1$sx%1$s格",
+	"l2complements.tooltip.misc.eternal_anvil": "所有操作不消耗经验。产出无修复惩罚",
+	"l2complements.configuration.scepterOfBoreasDamage": "凛冬权杖伤害(每秒4次)",
+	"l2complements.configuration.scepterOfBoreasDamage.tooltip": "默认: 5\n 范围: 1 ~ 1000",
+	"l2complements.configuration.scepterOfHeliosDamage": "阳炎权杖最大伤害(1秒蓄力时)",
+	"l2complements.configuration.scepterOfHeliosDamage.tooltip": " 默认: 20\n 范围: 1 ~ 1000",
+	"l2complements.configuration.sonicShooterCooldown": "音爆枪冷却(游戏刻)",
+	"l2complements.configuration.sonicShooterCooldown.tooltip": " 默认: 20\n 范围: 1 ~ 1000"
 }
